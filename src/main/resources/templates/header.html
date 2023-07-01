@@ -1,0 +1,72 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="">
+<head>
+    <style>
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #48D1CC;
+            padding: 10px;
+            height: 50px;
+        }
+
+        .header a {
+            color: #FFFFFF;
+            text-decoration: none;
+            margin-right: 10px;
+            font-size: 18px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .header p {
+            text-decoration: none;
+            margin: 20px;
+            font-size: 20px;
+            color: #FFFFFF;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .header input[type="submit"] {
+            background-color: #FFFFF0;
+            color: #48D1CC;
+            display: inline-block;
+            vertical-align: middle;
+            text-decoration: none;
+            margin-top: 17px;
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <ul class="nav navbar-left">
+        <li sec:authorize="isAuthenticated()">
+            <a th:href="@{/home}">Головна</a>
+        </li>
+        <li sec:authorize="isAuthenticated()">
+            <a th:href="@{/workouts/all}">Тренування</a>
+        </li>
+        <li sec:authorize="hasAuthority('ROLE_ADMIN')">
+            <a th:href="@{/users/all}">Список всіх користувачів</a>
+        </li>
+    </ul>
+    <ul class="nav navbar-right">
+        <li>
+            <div>
+                <p>Привіт спортсмен!</p>
+            </div>
+        </li>
+        <li sec:authorize="isAuthenticated()">
+            <form th:action="@{/logout}" method="post" class="navbar-form">
+                <div class="form-group">
+                    <input type="submit" value="Вийти" class="btn btn-default">
+                </div>
+            </form>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" integrity="sha384-H4X+4tKc7b8s4GoMrylmy2ssQYpDHoqzPa9aKXbDwPoPUA3Ra8PA5dGzijN+ePnH" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Workout List</title>
+</head>
+<body style="background-color: #FFFFF0;">
+<div th:replace="header"></div>
+<div class="col-md-offset-2">
+<h2>Список тренувань</h2>
+    <th:block sec:authorize="hasRole('ADMIN')">
+        <a href="/workouts/create"> Створити нове тренування</a>
+    </th:block>
+<table>
+    <thead>
+    <tr>
+        <th>Назва(натискай, щоб зареєструватися)</th>
+        <th>Рівень</th>
+        <th>Час у хвилинах</th>
+        <th>Ціна</th>
+        <th>Дата </th>
+        <th>Місяць</th>
+        <th>Година</th>
+        <th>Тренер</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Loop through workouts to generate rows -->
+    <tr th:each="workout, i : ${workoutsList}">
+        <td><a th:href="@{/registrations/create/workout/{workout_id}(workout_id=${workout.getId()})}"  th:text="${workout.getName()}"></a></td>
+            <td th:text="${workout.getUkrainianLevel(workout.getLevel())}"></td>
+        <td th:text="${workout.getTrainingTime()}"></td>
+            <td th:text="${workout.getPrice()}"></td>
+            <td th:text="${workout.getDate()}"></td>
+        <td th:text="${workout.getUkrainianMonth(workout.getMonth())}"></td>
+            <td th:text="${workout.getTime()}"></td>
+            <td th:text="${workout.getUser().getLastName()}"></td>
+        <td sec:authorize="hasRole('ADMIN')">
+            <a th:href="@{/workouts/{id}/update(id=${workout.getId()})}">Редагувати</a>
+        </td>
+        <td sec:authorize="hasRole('ADMIN')">
+            <a th:href="@{|/workouts/${workout.id}/delete|}">Видалити   </a>
+        </td>
+        <td><a th:href="@{/registrations/all/workout/{workout_id}(workout_id=${workout.getId()})}">Cписок реєстрацій</a></td>
+        </tr>
+    </th:block>
+    </tbody>
+</table>
+</div>
+</body>
+</html>

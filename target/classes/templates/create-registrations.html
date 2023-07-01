@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" integrity="sha384-H4X+4tKc7b8s4GoMrylmy2ssQYpDHoqzPa9aKXbDwPoPUA3Ra8PA5dGzijN+ePnH" crossorigin="anonymous">
+    <title>Training registration</title>
+</head>
+<body style="background-color: #FFFFF0;">
+<div th:replace="header"></div>
+<div class="col-md-offset-2">
+
+<form method="POST" th:action="@{/registrations/create/workout/{workout_id}(workout_id=${workout_id})}" th:object="${registration}">
+    <h2>Зареєструватися на тренування?</h2>
+    <button type="submit">Так</button>
+</form>
+<a th:href="@{/workouts/all}">Повернутися назад до тренувань</a>
+</div>
+</body>
+</html>

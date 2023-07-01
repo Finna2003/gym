@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" >
+    <meta charset="UTF-8">
+    <title>Update User</title>
+</head>
+<body style="background-color: #FFFFF0;">
+<div th:replace="header"></div>
+<div class="col-md-offset-2">
+<h1>Змінити дані про користувача</h1>
+<form method="POST" th:action="@{/users/{user_id}/update(user_id=${user.id})}" th:object="${user}">
+    <label for="firstName">Ім'я:</label>
+    <input type="text" th:field="*{firstName}" id="firstName"/>
+    <div style="color:red"th:if="${#fields.hasErrors('firstName')}"th:errors="*{firstName}">Ім'я помилкове</div>
+    <br/>
+    <label for="lastName">Прізвище:</label>
+    <input type="text" th:field="*{lastName}" id="lastName"/>
+    <div style="color:red"th:if="${#fields.hasErrors('lastName')}"th:errors="*{lastName}">Прізвище помилкове</div>
+    <br/>
+    <label for="email">Email:</label>
+    <input type="text" th:field="*{email}" id="email">
+    <div style="color:red"th:if="${#fields.hasErrors('email')}"th:errors="*{email}">Email помилковий</div>
+    <br/>
+<!--    <label for="oldPassword">Enter old password:</label>-->
+<!--    <input type="oldPassword" th:field="*{oldPassword}" id="oldPassword">-->
+<!--    <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</div>-->
+    <label for="password">Пароль:</label>
+    <input type="password" th:field="*{password}" id="password">
+    <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Пароль помилковий</div>
+    <br/>
+    <input type="submit" value="Оновити"/><input type="reset" value="Очистити"/>
+</form>
+</div>
+</body>
+</html>

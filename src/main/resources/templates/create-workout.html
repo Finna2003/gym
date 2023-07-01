@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" integrity="sha384-H4X+4tKc7b8s4GoMrylmy2ssQYpDHoqzPa9aKXbDwPoPUA3Ra8PA5dGzijN+ePnH" crossorigin="anonymous">
+    <title>Create Workout</title>
+</head>
+<body style="background-color: #FFFFF0;">
+<div th:replace="header"></div>
+<div class="col-md-offset-2">
+<h1>Створити нове тренування</h1>
+
+<form method="POST" th:action="@{/workouts/create}" th:object="${workout}">
+    <div>
+        <label for="name">Назва:</label>
+        <input type="text" th:field="*{name}" id="name"/>
+        <div style="color:red"th:if="${#fields.hasErrors('name')}"th:errors="*{name}">Назва помилкова</div>
+    </div>
+    <div>
+        <label for="trainingTime">Час, скільки воно буде тривати(хвилини):</label>
+        <input type="number" th:field="*{trainingTime}" id="trainingTime" />
+        <div style="color:red"th:if="${#fields.hasErrors('trainingTime')}"th:errors="*{trainingTime}">Час помилковий</div>
+    </div>
+    <div>
+        <label for="level">Рівень:</label>
+        <select th:field="*{level}"id="level">
+            <option value="BEGINNER">Початківець</option>
+            <option value="INTERMEDIATE">Середній</option>
+            <option value="ADVANCED">Просунутий</option>
+        </select>
+    </div>
+    <div>
+        <label for="price">Ціна:</label>
+        <input type="number" th:field="*{price}" id="price" />
+        <div style="color:red" th:if="${#fields.hasErrors('price')}"th:errors="*{price}">Ціна помилкова</div>
+    </div>
+    <div>
+        <label for="month">Місяць:</label>
+        <select th:field="*{month}"id="month">
+            <option value="JANUARY">Січень</option>
+            <option value="FEBRUARY">Лютий</option>
+            <option value="MARCH">Березень</option>
+            <option value="APRIL">Квітень</option>
+            <option value="MAY">Травень</option>
+            <option value="JUNE">Червень</option>
+            <option value="JULY">Липень</option>
+            <option value="AUGUST">Серпень</option>
+            <option value="SEPTEMBER">Вересень</option>
+            <option value="OCTOBER">Жовтень</option>
+            <option value="NOVEMBER">Листопад</option>
+            <option value="DECEMBER">Грудень</option>
+        </select>
+    </div>
+    <div>
+        <label for="date">Число місяця:</label>
+        <input type="number" th:field="*{date}" id="date" />
+        <div style="color:red" th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Число місяця помилкове</div>
+    </div>
+    <div>
+        <label for="time">Час(0-24):</label>
+        <input type="number" th:field="*{time}" id="time" />
+        <div style="color:red" th:if="${#fields.hasErrors('time')}" th:errors="*{time}">Час помилковий</div>
+    </div>
+
+
+    <button type="submit">Створити</button><input type="reset" value="Очистити"/>
+</form>
+</div>
+</body>
+</html>

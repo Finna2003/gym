@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" integrity="sha384-H4X+4tKc7b8s4GoMrylmy2ssQYpDHoqzPa9aKXbDwPoPUA3Ra8PA5dGzijN+ePnH" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Home page</title>
+</head>
+<body style="background-color: #FFFFF0;">
+<div th:replace="header"></div>
+<div class="col-md-offset-2">
+<h1>Список усіх користувачів</h1>
+<a href="/users/create">Створити нового користувача</a>
+<table>
+    <thead>
+    <tr>
+        <th>Номер</th>
+        <th>Повне ім'я</th>
+        <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user, i : ${userList}">
+        <td th:text="${i.index + 1}"></td>
+        <td th:text="${user.getFirstName()+' '+user.getLastName()}"> </td>
+        <td th:text="${user.getEmail()}"></td>
+        <td><a th:href="@{/users/{user_id}/update(user_id=${user.getId()})}">Редагувати  </a></td>
+        <td><a th:href="@{|/users/${user.id}/delete|}">Видалити  </a></td>
+    </tr>
+    </tbody>
+</table>
+</div>
+</body>
+</html>
